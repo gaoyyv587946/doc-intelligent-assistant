@@ -174,7 +174,15 @@ api:
       - "https://api.company.com/"
       - "http://localhost:"
 ```
-
+### 效果展示
+#### 登录界面
+<img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/5dcffbc3-e062-42eb-ad03-02faf26cae67" />
+默认admin/admin123
+#### chat
+<img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/692c4cb0-1660-41b8-aebb-c0dc41746532" />
+#### 分析
+<img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/371ac267-f912-4b5f-b562-9c0d786fb1d0" />
+#### 更多等你发现
 ## License
 
 MIT
