@@ -1,0 +1,52 @@
+[
+  {
+    "query": "GET /api/users",
+    "relevantDocIds": ["sample-api.md#0", "sample-api.md#1"],
+    "queryType": "exact_path"
+  },
+  {
+    "query": "POST /api/users",
+    "relevantDocIds": ["sample-api.md#2"],
+    "queryType": "exact_path"
+  },
+  {
+    "query": "用户注册接口",
+    "relevantDocIds": ["sample-api.md#2"],
+    "queryType": "semantic"
+  },
+  {
+    "query": "怎么查询用户列表",
+    "relevantDocIds": ["sample-api.md#0", "sample-api.md#1"],
+    "queryType": "colloquial"
+  },
+  {
+    "query": "删除用户的接口",
+    "relevantDocIds": ["sample-api.md#3"],
+    "queryType": "semantic"
+  },
+  {
+    "query": "哪些接口需要传 page 参数",
+    "relevantDocIds": ["sample-api.md#0"],
+    "queryType": "param"
+  },
+  {
+    "query": "怎么创建新账号",
+    "relevantDocIds": ["sample-api.md#2"],
+    "queryType": "colloquial"
+  },
+  {
+    "query": "GET /api/users/{userId}",
+    "relevantDocIds": ["sample-api.md#1"],
+    "queryType": "exact_path"
+  },
+  {
+    "query": "修改用户信息",
+    "relevantDocIds": ["sample-api.md#3"],
+    "queryType": "semantic"
+  },
+  {
+    "query": "有哪些用户相关的接口",
+    "relevantDocIds": ["sample-api.md#0", "sample-api.md#1", "sample-api.md#2", "sample-api.md#3"],
+    "queryType": "overview"
+  }
+]
