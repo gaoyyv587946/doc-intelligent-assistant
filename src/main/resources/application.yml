@@ -90,7 +90,6 @@ api:
     prefixes:
       - "https://api.company.com/"
       - "http://localhost:"
-      - "http://172.27.39.78:18989"
     max-retry: 3
 
 # ==================== JWT ====================
