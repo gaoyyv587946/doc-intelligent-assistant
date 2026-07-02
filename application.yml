@@ -1,0 +1,109 @@
+spring:
+  application:
+    name: doc-agent
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 50MB
+
+server:
+  port: 54189
+
+# ==================== Chat模型配置 ====================
+# DeepSeek V4 / MiMo / GPT等OpenAI兼容API（云端）
+chat:
+  model:
+    api-key: ${CHAT_API_KEY:sk-your-api-key}
+    base-url: ${CHAT_BASE_URL:https://api.deepseek.com/v1}
+    model-name: ${CHAT_MODEL:deepseek-v4-flash}
+    temperature: 0.3
+    max-tokens: 2000
+  memory:
+    max-messages: 20
+
+# ==================== Embedding向量化 ====================
+# 使用本地ONNX模型（AllMiniLmL6V2），文档完全不出本机
+# 模型切换：设置 model-type=bge-small-zh 并取消pom.xml中bge依赖的注释
+embedding:
+  persistence-path: embedding-store-data.json
+  model-type: bge-small-zh  # 可选: all-minilm(默认), bge-small-zh(中文专精)
+
+# ==================== RAG 配置 ====================
+rag:
+  document-path: classpath:docs/
+  local-docs-path: docs
+  # 分片配置（文档结构化分片，按 ## 标题切分）
+  chunk-size: 1500        # 单个chunk最大字符数
+  chunk-min-size: 100     # 过短的chunk会合并
+  # 检索基础配置
+  min-score: 0.6
+  max-results: 5
+  format-max-chunk-size: 2000
+  use-format: false
+
+  # RRF（倒数排名融合）参数
+  rrf:
+    k: 60                 # RRF平滑参数，值越大排名差异的影响越小
+
+  # 自适应权重（基于两路检索分数分布动态调整）
+  adaptive-weight:
+    enabled: true          # 开启后会根据每路检索的平均分数自动调整权重比
+
+  # RRF基础权重（自适应权重在此基础上动态调整）
+  weight:
+    exact-keyword: 1.5     # 精确查询时keyword权重（包含API路径/HTTP方法）
+    exact-vector: 1.0      # 精确查询时vector权重
+    semantic-vector: 1.5   # 语义查询时vector权重
+    semantic-keyword: 1.0  # 语义查询时keyword权重
+
+  # Metadata Boosting 系数（基于token覆盖率自适应计算，此处为上限系数）
+  boost:
+    title-match: 1.5       # 查询与标题高度匹配时的最大加分倍数
+    param-match: 1.3       # 查询包含参数名时的最大加分倍数
+    api-path-match: 1.4    # 查询与API路径匹配时的最大加分倍数
+
+  # LLM查询改写（口语化查询 → 精确查询，可选增强层）
+  query-rewrite:
+    enabled: true          # LLM改写开关（语料库词汇扩展始终开启，无需LLM）
+    max-cache-size: 500
+
+  # Metadata智能提取（LLM辅助提取，当正则提取不足时自动增强）
+  metadata:
+    llm-enhance: true      # 开启后对正则提取结果不完整的chunk用LLM补充提取
+
+# ==================== 分词器配置 ====================
+# smartcn: Lucene 智能中文分词器（HMM 词性标注，默认）
+# jieba: jieba 专业中文分词（需jieba-analysis依赖）
+tokenizer:
+  type: jieba             # 可选: smartcn(默认), jieba(专业中文分词)
+
+# ==================== 关键词索引配置 ====================
+# Lucene 索引持久化路径，重启后自动恢复，无需重建
+keyword:
+  index:
+    path: keyword-index
+
+# ==================== API 白名单 ====================
+api:
+  whitelist:
+    enabled: true
+    prefixes:
+      - "https://api.company.com/"
+      - "http://localhost:"
+      - "http://172.27.39.78:18989"
+    max-retry: 3
+
+# ==================== JWT ====================
+jwt:
+  secret: ${JWT_SECRET:ThisIsADevSecretKeyThatShouldBeChangedInProduction2024!}
+  expiration: 86400000
+
+# ==================== SQLite 数据库 ====================
+db:
+  path: data/app.db
+
+# ==================== 日志 ====================
+logging:
+  level:
+    com.example.apiagent: DEBUG
+    dev.langchain4j: INFO
