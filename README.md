@@ -1,5 +1,6 @@
 # doc-intelligent-assistant
 基于 LangChain4j + Spring Boot + React 构建的智能文档检索助手。支持文档上传、向量化检索、混合搜索（BM25 + 向量）、知识库管理、实时流式对话等功能。
+存在部分问题，欢迎提出。
 
 ## 功能特性
 
@@ -178,10 +179,13 @@ api:
 #### 登录界面
 <img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/5dcffbc3-e062-42eb-ad03-02faf26cae67" />
 默认admin/admin123
+
 #### chat
 <img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/692c4cb0-1660-41b8-aebb-c0dc41746532" />
+
 #### 分析
 <img width="1920" height="879" alt="image" src="https://github.com/user-attachments/assets/371ac267-f912-4b5f-b562-9c0d786fb1d0" />
+
 #### 更多等你发现
 ## License
 
