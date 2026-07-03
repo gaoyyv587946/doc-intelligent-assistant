@@ -22,7 +22,7 @@ const WeightTuningView = ({
 
       <div className="wt-controls">
         <div className="wt-input-group">
-          <label>自定义权重（可选，格式: vector,keyword 例如 0.7,0.3）</label>
+          <label>自定义权重（可选，格式: vector/keyword 例如 0.7/0.3,多个使用逗号分割）</label>
           <input type="text" value={wtCustomWeights} onChange={(e) => setWtCustomWeights(e.target.value)} placeholder="留空则自动测试多组权重" />
         </div>
         <div className="wt-input-group">
