@@ -106,6 +106,10 @@ public class WeightTuningController {
             return Double.compare(rb, ra);
         });
 
+        if(experimentResults.isEmpty()){
+            return null;
+        }
+
         // 找出最优
         Map<String, Object> best = experimentResults.get(0);
 
